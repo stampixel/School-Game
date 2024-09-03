@@ -4,9 +4,11 @@
 # name of the character.
 
 define e = Character("Eileen")
+define pov = Character("[povname]", image="prot")
+define narrator = Character("")
+define mystery = Character("???")
+define mentor = Character("Mentor")
 
-
-# The game starts here.
 
 label start:
 
@@ -20,14 +22,145 @@ label start:
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
 
-    show eileen happy
-
     # These display lines of dialogue.
 
-    e "You've created a new Ren'Py game."
 
-    e "Once you add a story, pictures, and music, you can release it to the world!"
+    python:
+        povname = renpy.input("What is your name?", length=32)
+        povname = povname.strip()
 
-    # This ends the game.
+        if not povname:
+             povname = "Me"
+
+    narrator "You wake up from a deep sleep, disoriented, your mind a blank slate..."
+
+    show povname
+
+    pov "\"Where am I?\""
+
+    "*You look around, trying to piece together your surroundings.*"
+
+    menu:
+        "Explore":
+            "You walk through the eerie landscape, noticing the chaotic nature of the surroundings—trees shaped like question marks, rivers flowing backward."
+            "You hear a rustling sound from a nearby bush..."
+            pov "WHO'S THERE?" with hpunch
+            "The rustling grows louder, and then, emerging from the bushes with a graceful stride, is an older figure clad in flowing robes, adorned with quill and parchment motifs."
+
+        "Wait":
+            "You sit quietly, trying to gather their thoughts."
+            pov "AHHHHHHHHHHHHHHHHHHHHHHHH!! Where on earth did you come from???" with hpunch
+
+
+
+
+
+    mystery "Ah, I see you've awakened at last. Welcome to Literaria, young one."
+
+    "The figure steps fully into view, revealing themselves, a wise and kindly face etched with years of knowledge."
+
+    pov "Who... who are you??? Where am I??? What is going on???"
+
+    mentor "I am known as the Mentor, a guide for those chosen by the ancient Order of Composition. And you, my dear student, are one such chosen. The fate of Literaria rests upon your ability to master the art of Script Weaving."
+
+    mentor "Come, there is much to learn, and time is of the essence. The forces of Chaos & Confusion grow stronger by the day, and only through the power of words can we hope to restore balance to our land."
+
+    "The Mentor gestures to a nearby path, winding deeper into the heart of the forest, where the journey will begin."
+
+    pov "Why me? I don't even know who I am..."
+
+    mentor "That is something you will discover on this journey. But know this, the power within you is immense, waiting to be unlocked. You are the one destined to wield the Magical Quill, to bring order where there is none."
+
+    "With a nod, the Mentor begins to lead the way, and you, though uncertain, feels a growing determination within."
+
+    mentor "Follow me, and I will teach you the ways of composition. Together, we will restore harmony to Literaria. Once and for all!"
+
+    mentor "Are you ready [povname]?"
+
+    label choice_intro:
+        mentor "Are you ready [povname]?"
+
+    menu:
+        "Yes":
+            jump choice_intro_a
+        "... how do you know my name again?":
+            jump choice_intro_b
+
+    label choice_intro_a:
+        mentor "Great, then our journey together shall begin!"
+        mentor "Follow me."
+        pause 3
+        jump level1
+
+    label choice_intro_b:
+        jump choice_intro
+
+
+
+label level1:
+    "Your feet are sour and your mouth is dry. Time seems to work differently in this universe. You felt as though you have been walking for hours."
+    "You and your Mentor stand in front of a grand, mystical portal that swirls with images from the story \"The Fall of a City.\""
+    mentor "This seems to be where all the Confusion and Chaos originates from."
+    mentor "Your first task is to identify two key character traits of Teddy’s aunt or uncle. Their traits hold the power to influence the structure of your essay."
+    "The portal shows scenes from the story, with the aunt and uncle interacting with Teddy."
+    "You see the way they speak and act—what do you observe?"
+
+    label level1_task:
+        menu:
+            "The aunt is controlling and dismissive.":
+                "The portal reacts. It turns ocean blue. You can't seem to see through to the other side."
+                "Do you choose to enter?"
+                menu:
+                    "Yes":
+                        pov "Have you every been through one of these? Where would we end up?"
+                        mentor "Theres only one way to find out. "
+                        "You hesitantly step in, one foot at a time."
+                        jump level2
+                    "No":
+                        "The mentor pushes you. You trip on a rock and face plant in. Better luck next time..."
+                        jump level2
+            "The uncle is stern and critical.":
+                "Not quite, give it another go."
+                jump level1_task
+            "The aunt is nurturing and supportive.":
+                "Not quite, give it another go."
+                jump level1_task
+            "The uncle is playful and encouraging.":
+                "Not quite, give it another go."
+                jump level1_task
 
     return
+
+label level2:
+
+    return
+
+label level3:
+    return
+
+label level4:
+    return
+
+label level5:
+    return
+
+label level6:
+    return
+
+label level7:
+    return
+
+label level8:
+    return
+
+label level9:
+    return
+
+label level10:
+    return
+
+
+
+
+
+
