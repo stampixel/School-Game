@@ -132,8 +132,27 @@ label level1:
     return
 
 label level2:
+    "The portal closes behind you, disappearing altogether, without leaving a single trace behind."
+    "You look around, gray brick walls, ceiling tens of meters high, you appear to be in some sort of castle."
+    pause 3
+    "A magical Aura leads you to a large, ancient writing desk with a blank parchment lying on it."
+    mentor "A strong essay needs a clear and focused topic sentence. Use the traits you've identified earlier to create one."
 
-    return
+    $ sentence = renpy.input("Type away: ", length=500)
+    centered "[sentence]"
+
+    mentor "After finishing, you may turn to your peers and have them enter a rating between 1-5."
+
+    label level2_task:
+        $ rating = renpy.input("Rate from 1-5: ", length=1)
+        if rating != 1 or rating != 2 or rating != 3 or rating != 4 or rating != 5:
+            "Invalid input."
+            jump level2_task
+
+    "The mystery force judges your writing, the parchment glows slightly."
+    "You hear movement, turning back, the stone wall shifts, creating an exit."
+    "You proceed followed by your mentor."
+    jump level3
 
 label level3:
     return
