@@ -154,10 +154,39 @@ label level2:
     "You proceed followed by your mentor."
     jump level3
 
-label level3:
-    return
+label level3: # not complete, finish questions
+    "You see something unfamiliar, though you still couldn't remember anything before, you are sure you have never seen something like it before."
+    pov "What the hell is that?"
+    mentor "That is a Chaos & Confusion Minion that embodies \"Vague Argument.\""
+    mentor "To defeat it, you must clearly state a point using the PEE method: Point, Evidence, Explanation."
+    mentor "Out of the following, which sentence follows that structure correctly, take your team and read each one carefully."
+
+    $ attempts = 0
+
+     label level3_task:
+        menu:
+        # first, pick a character trait
+            "The aunt is controlling and dismissive.":
+                if attempts > 0:
+                    "You barely made it out alive."
+                "Your statement weakens the minion, but it’s still standing."
+            "The uncle is stern and critical.":
+                "Not quite, give it another go."
+                attempts += 1
+                jump level3_task
+            "The aunt is nurturing and supportive.":
+                "Not quite, give it another go."
+                attempts += 1
+                jump level3_task
+            "The uncle is playful and encouraging.":
+                "Not quite, give it another go."
+                attempts += 1
+                jump level3_task
+    ""
+    jump label4
 
 label level4:
+
     return
 
 label level5:
