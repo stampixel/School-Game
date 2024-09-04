@@ -4,19 +4,25 @@
 # name of the character.
 
 define e = Character("Eileen")
-define pov = Character("[povname]", image="prot")
+define pov = Character("[povname]",default="Me", image="prot")
 define narrator = Character("")
 define mystery = Character("???")
 define mentor = Character("Mentor")
 
+init:
+    transform flip:
+        xzoom -1.0
 
 label start:
+# Define an alternate to povname just incase it doesnt work
+    $ povname = "Kevin"
+    jump level3
 
     # Show a background. This uses a placeholder by default, but you can
     # add a file (named either "bg room.png" or "bg room.jpg") to the
     # images directory to show it.
 
-    scene bg room
+    scene bg forest
 
     # This shows a character sprite. A placeholder is used, but you can
     # replace it by adding a file named "eileen happy.png" to the images
@@ -34,48 +40,49 @@ label start:
 
     narrator "You wake up from a deep sleep, disoriented, your mind a blank slate..."
 
-    show povname
+    show rogue
 
     pov "\"Where am I?\""
 
+    show rogue at flip
+
+
     "*You look around, trying to piece together your surroundings.*"
+    show rogue
+
+
 
     menu:
         "Explore":
-            "You walk through the eerie landscape, noticing the chaotic nature of the surroundings—trees shaped like question marks, rivers flowing backward."
+            "You walk through the eerie landscape, noticing the chaotic nature of the surroundings—trees."
             "You hear a rustling sound from a nearby bush..."
             pov "WHO'S THERE?" with hpunch
             "The rustling grows louder, and then, emerging from the bushes with a graceful stride, is an older figure clad in flowing robes, adorned with quill and parchment motifs."
+            show rogue at right
+            with move
+            show mentor at left
+            with move
+
 
         "Wait":
             "You sit quietly, trying to gather their thoughts."
+            pause(2.0)
+            show rogue at right
+            with move
+            show mentor at left
+            with move
             pov "AHHHHHHHHHHHHHHHHHHHHHHHH!! Where on earth did you come from???" with hpunch
 
-
-
-
-
     mystery "Ah, I see you've awakened at last. Welcome to Literaria, young one."
-
     "The figure steps fully into view, revealing themselves, a wise and kindly face etched with years of knowledge."
-
     pov "Who... who are you??? Where am I??? What is going on???"
-
     mentor "I am known as the Mentor, a guide for those chosen by the ancient Order of Composition. And you, my dear student, are one such chosen. The fate of Literaria rests upon your ability to master the art of Script Weaving."
-
     mentor "Come, there is much to learn, and time is of the essence. The forces of Chaos & Confusion grow stronger by the day, and only through the power of words can we hope to restore balance to our land."
-
     "The Mentor gestures to a nearby path, winding deeper into the heart of the forest, where the journey will begin."
-
     pov "Why me? I don't even know who I am..."
-
     mentor "That is something you will discover on this journey. But know this, the power within you is immense, waiting to be unlocked. You are the one destined to wield the Magical Quill, to bring order where there is none."
-
     "With a nod, the Mentor begins to lead the way, and you, though uncertain, feels a growing determination within."
-
     mentor "Follow me, and I will teach you the ways of composition. Together, we will restore harmony to Literaria. Once and for all!"
-
-    mentor "Are you ready [povname]?"
 
     label choice_intro:
         mentor "Are you ready [povname]?"
@@ -83,7 +90,7 @@ label start:
     menu:
         "Yes":
             jump choice_intro_a
-        "... how do you know my name again?":
+        "... how do you know my name?":
             jump choice_intro_b
 
     label choice_intro_a:
@@ -98,6 +105,9 @@ label start:
 
 
 label level1:
+    show bg portal
+    with fade
+
     "Your feet are sour and your mouth is dry. Time seems to work differently in this universe. You felt as though you have been walking for hours."
     "You and your Mentor stand in front of a grand, mystical portal that swirls with images from the story \"The Fall of a City.\""
     mentor "This seems to be where all the Confusion and Chaos originates from."
@@ -132,20 +142,26 @@ label level1:
     return
 
 label level2:
-    "The portal closes behind you, disappearing altogether, without leaving a single trace behind."
+    show bg castle
+    with fade
+
+    "The portal closes behind you, disappearing altogether, without leaving a single trace behind." with hpunch
     "You look around, gray brick walls, ceiling tens of meters high, you appear to be in some sort of castle."
     pause 3
     "A magical Aura leads you to a large, ancient writing desk with a blank parchment lying on it."
+    show mentor at right
+    show rogue at left
+    with move
     mentor "A strong essay needs a clear and focused topic sentence. Use the traits you've identified earlier to create one."
 
     $ sentence = renpy.input("Type away: ", length=500)
-    centered "[sentence]"
 
     mentor "After finishing, you may turn to your peers and have them enter a rating between 1-5."
 
     label level2_task:
+        centered "[sentence]" (what_color="#FFFFFF")
         $ rating = renpy.input("Rate from 1-5: ", length=1)
-        if rating != 1 or rating != 2 or rating != 3 or rating != 4 or rating != 5:
+        if not (rating == "1" or rating == "2" or rating == "3" or rating == "4" or rating == "5"):
             "Invalid input."
             jump level2_task
 
@@ -157,6 +173,10 @@ label level2:
     jump level3
 
 label level3: # not complete, finish questions
+    show bg shrooms
+    show mentor at left
+    show rogue at left
+    with fade
     "You see something unfamiliar, though you still couldn't remember anything before, you are sure you have never seen something like it before."
     pov "What the hell is that?"
     mentor "That is a Chaos & Confusion Minion that embodies \"Vague Argument.\""
@@ -165,24 +185,24 @@ label level3: # not complete, finish questions
 
     $ attempts = 0
 
-     label level3_task:
+    label level3_task:
         menu:
         # first, pick a character trait
             "The aunt is controlling and dismissive.":
                 if attempts > 0:
                     "You barely made it out alive."
-                "Your statement weakens the minion, but it’s still standing."
+                    "Your statement weakens the minion, but it’s still standing."
             "The uncle is stern and critical.":
                 "Not quite, give it another go."
-                attempts += 1
+                $ attempts += 1
                 jump level3_task
             "The aunt is nurturing and supportive.":
                 "Not quite, give it another go."
-                attempts += 1
+                $ attempts += 1
                 jump level3_task
             "The uncle is playful and encouraging.":
                 "Not quite, give it another go."
-                attempts += 1
+                $ attempts += 1
                 jump level3_task
     ""
     jump label4
@@ -226,14 +246,14 @@ label level4:
 label sidequest:
     "All of a sudden, everything around you freezes."
     "The vibrant colors of Literaria dimmed, and the swirling winds came to a halt. The world, once alive with energy, now stood eerily still. "
-    pov "What’s happening? Why is everything stopped?" hpunch
+    pov "What’s happening? Why is everything stopped?" with hpunch
     mentor "The Mentor's eyes, usually so full of wisdom and warmth, now held a deep, almost somber intensity. They took a step closer to you, the silence between you growing heavier with each passing moment."
     "There is something you need to know, something I have kept hidden until now."
     pov "What do you mean? What’s going on?"
     mentor "I am not just a guide in this world, not just a teacher showing you the ways of Literaria. I am its creator."
     "The words hang in the air, their weight sinking in slowly. The Mentor—your trusted companion throughout this journey—created Literaria? The realization stirs a mix of emotions within you: awe, confusion, and a hint of fear."
     pov "You… created this world? But why? Why reveal this to me now?"
-    mentor "Literaria is more than just a land of stories; it is a delicate balance of knowledge, creativity, and truth. I brought it into existence to help others learn, to give life to the lessons within stories. But every world needs a guardian, someone to maintain that balance and protect it from chaos.""
+    mentor "Literaria is more than just a land of stories; it is a delicate balance of knowledge, creativity, and truth. I brought it into existence to help others learn, to give life to the lessons within stories. But every world needs a guardian, someone to maintain that balance and protect it from chaos."
     "The Mentor pauses, looking into your eyes with a seriousness that makes your heart race."
 
     mentor "I will give you two options. Either forget the ugly truth or keep fighting knowing everything around you is planned and fictional."
@@ -337,17 +357,22 @@ label level8:
     mentor "Now that you have gotten a taste of what it was like to structure a simple paragraph essay, it is now your turn."
     pov "But I am not ready yet."
     mentor "You won't know unless you actually try."
-    mentor "using the example essay we came up with, write your own, this time, on Teddy from \"The Fal of a City\""
-    pov "Here goes..."
+    mentor "using the example essay we came up with, write your own, this time, on Teddy from \"The Fall of a City\""
+    pov "Here goes... (I should write it in Google docs instead...)"
 
     jump level9
 
 label level9:
+    $ essay = renpy.input("Paste essay")
 
 #     character writes their own essay
     mentor "I see you have finally finished, care to go through a checklist with me?"
     pov "Ok."
-    # show essay
+
+
+
+    centered "[essay]"
+
 
 
 label level10:
