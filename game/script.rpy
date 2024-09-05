@@ -9,6 +9,12 @@ define narrator = Character("")
 define mystery = Character("???")
 define mentor = Character("Mentor")
 
+python:
+    score = 0
+    total_score = 9
+    side_quest = False
+
+
 init:
     transform flip:
         xzoom -1.0
@@ -58,18 +64,18 @@ label start:
             "You hear a rustling sound from a nearby bush..."
             pov "WHO'S THERE?" with hpunch
             "The rustling grows louder, and then, emerging from the bushes with a graceful stride, is an older figure clad in flowing robes, adorned with quill and parchment motifs."
-            show rogue at right
+            show rogue at left
             with move
-            show mentor at left
+            show mentor at right
             with move
 
 
         "Wait":
             "You sit quietly, trying to gather their thoughts."
             pause(2.0)
-            show rogue at right
+            show rogue at left
             with move
-            show mentor at left
+            show mentor at  right
             with move
             pov "AHHHHHHHHHHHHHHHHHHHHHHHH!! Where on earth did you come from???" with hpunch
 
@@ -89,19 +95,13 @@ label start:
 
     menu:
         "Yes":
-            jump choice_intro_a
+            mentor "Great, then our journey together shall begin!"
+            mentor "Follow me."
+            pause(3.0)
+            jump level1
         "... how do you know my name?":
-            jump choice_intro_b
-
-    label choice_intro_a:
-        mentor "Great, then our journey together shall begin!"
-        mentor "Follow me."
-        pause 3
-        jump level1
-
-    label choice_intro_b:
-        jump choice_intro
-
+        mentor "I know many things..."
+            jump choice_intro
 
 
 label level1:
@@ -115,9 +115,12 @@ label level1:
     "The portal shows scenes from the story, with the aunt and uncle interacting with Teddy."
     "You see the way they speak and act—what do you observe?"
 
+    $ wrong = False
     label level1_task:
         menu:
             "The aunt is controlling and dismissive.":
+                if not wrong:
+                    $ score += 1
                 "The portal reacts. It turns ocean blue. You can't seem to see through to the other side."
                 "Do you choose to enter?"
                 menu:
@@ -131,15 +134,16 @@ label level1:
                         jump level2
             "The uncle is stern and critical.":
                 "Not quite, give it another go."
+                $ wrong = True
                 jump level1_task
             "The aunt is nurturing and supportive.":
                 "Not quite, give it another go."
+                $ wrong = True
                 jump level1_task
             "The uncle is playful and encouraging.":
                 "Not quite, give it another go."
+                $ wrong = True
                 jump level1_task
-
-    return
 
 label level2:
     show bg castle
@@ -158,25 +162,48 @@ label level2:
 
     mentor "After finishing, you may turn to your peers and have them enter a rating between 1-5."
 
+    $ wrong = False
     label level2_task:
         centered "[sentence]" (what_color="#FFFFFF")
         $ rating = renpy.input("Rate from 1-5: ", length=1)
         if not (rating == "1" or rating == "2" or rating == "3" or rating == "4" or rating == "5"):
             "Invalid input."
             jump level2_task
+        if rating == "1" or rating == "2" or rating == "3":
+             $ wrong = True
+        mentor "How would you describe [povname]'s sentence."
+        menu:
+            "Creative":
+                $ level2_rating = "creative"
+            "Experimental":
+                $ level2_rating = "experimental"
+            "Formal convention":
+                $ level2_rating = "formal"
+            "Very well written":
+                $ level2_rating = "well"
+        mentor "I feel much better now!"
+
+        if not wrong:
+            $ score += 1
 
             # have them describe your sentence
 
     "The mystery force judges your writing, the parchment glows slightly."
     "You hear movement, turning back, the stone wall shifts, creating an exit."
+    pov "Woah! I have no words... this place... crazy stuff."
+    mentor "Yes, thank you. Much time has been put into this..."
+    pov "..."
+    mentor "You'll understand."
     "You proceed followed by your mentor."
     jump level3
 
 label level3: # not complete, finish questions
     show bg shrooms
     show mentor at left
-    show rogue at left
+    show rogue at right
     with fade
+    # PIXEL ART HERE
+    show minion
     "You see something unfamiliar, though you still couldn't remember anything before, you are sure you have never seen something like it before."
     pov "What the hell is that?"
     mentor "That is a Chaos & Confusion Minion that embodies \"Vague Argument.\""
@@ -191,7 +218,10 @@ label level3: # not complete, finish questions
             "The aunt is controlling and dismissive.":
                 if attempts > 0:
                     "You barely made it out alive."
-                    "Your statement weakens the minion, but it’s still standing."
+                else:
+                    $ score += 1
+
+                "Your statement weakens the minion, but it’s still standing."
             "The uncle is stern and critical.":
                 "Not quite, give it another go."
                 $ attempts += 1
@@ -204,38 +234,45 @@ label level3: # not complete, finish questions
                 "Not quite, give it another go."
                 $ attempts += 1
                 jump level3_task
-    ""
-    jump label4
+    jump level4
 
 label level4:
     mentor "Don't worry kid, I have another trick up my sleeves."
     mentor "Riddle me this: Dawn comes after night like ________ comes after Point."
 
     label level4_question:
+        $ wrong = False
         menu:
             "Explanation":
-                "Maybe if you used more than just two fingers..."
+                mentor "Maybe if you used more than just two fingers..."
+                $ wrong = True
                 jump level4_question
             "Evidence":
                 mentor "Well spoken! Goodly done, young one! Let us employ that as our stratagem to vanquish the minion."
-
+        if not wrong:
+            $ score += 1
     mentor "Now tell me, what is a quotation that best demonstrates the point you’ve identified previously? (POINT GOES HERE)"
 
     "You instinctively take our the Magical Quill."
 
+    $ wrong = False
     label level4_task:
         menu:
             "The aunt is controlling and dismissive.":
                 "Guided by your hands, the quill moves swiftly across the air."
+                $ wrong = True
             "The uncle is stern and critical.":
                 "Not quite, give it another go."
+                $ wrong = True
                 jump level4_task
             "The aunt is nurturing and supportive.":
                 "Not quite, give it another go."
-                jump level4_task
             "The uncle is playful and encouraging.":
                 "Not quite, give it another go."
+                $ wrong = True
                 jump level4_task
+        if not wrong:
+            $ score += 1
     "It further weakens the minion."
 
     mentor "Excellent! But to truly defeat the minion, you must explain how... "
@@ -259,18 +296,19 @@ label sidequest:
     mentor "I will give you two options. Either forget the ugly truth or keep fighting knowing everything around you is planned and fictional."
     "The Mentor steps back slightly, raising their hand as two glowing orbs appear between you. Each orb pulses with a different energy, radiating a sense of immense power and responsibility."
 
-    "(Pick wisely as this is a major determining factor of the outcome of your journey)"
+    "(Pick wisely as this is a determining factor of the outcome of your journey)"
     menu:
         "Keep fighting knowing everything around you is preplanned and has a predetermined outcome.":
             mentor "It might be hard at first, but I thank you for understanding."
             "The world reverts back to normal. You can feel the cool breeze of the wind, it flows around and you feel comfort."
             mentor "Now, where were we?"
             mentor "To truly defeat the minion, you must explain how this evidence supports your point."
+            $ side_quest = True
         "Forget what happened.":
             mentor "Very well. Although hard to make, the choice is indeed a valid one at times."
             "Your mind turns blank for a second."
-            mentor "... you must explain how this evidence supports your point."
-
+            pause(3.0)
+            mentor "Excellent! But to truly defeat the minion, you must explain how this evidence supports your point."
     jump level5
 
 label level5:
@@ -278,19 +316,26 @@ label level5:
     "You face the now weakened minion, ready for the final blow."
     mentor  "Now, explain how the quote you selected proves the character trait. Choose the best answer."
 
+    $ wrong = False
     label level5_task:
         menu:
             "The aunt is controlling and dismissive.":
                 "Guided by your hands, the quill moves swiftly across the air."
+                $ wrong = True
+                jump level5_task
             "The uncle is stern and critical.":
                 "Not quite, give it another go."
+                $ wrong = True
                 jump level5_task
             "The aunt is nurturing and supportive.":
                 "Not quite, give it another go."
-                jump level5_task
+                $ wrong = True
             "The uncle is playful and encouraging.":
                 "Not quite, give it another go."
+                $ wrong = True
                 jump level5_task
+        if not wrong:
+            $ score += 1
     "The explanation delivers a decisive strike, defeating the Chaos & Confusion Minion."
     "Well done! But your journey is far from over."
     jump level6
@@ -298,21 +343,27 @@ label level5:
 label level6:
     "With the first minion defeated, the protagonist moves forward, encountering another representing \"Weak Transitions.\""
     mentor "To move smoothly between ideas, a strong transition is key. Let’s identify your second character trait and introduce it."
-
     mentor "Which of the following transitions make the sentences flow while also strengthening the root argument?"
+
+    $ wrong = False
     label level6_task:
         menu:
             "The aunt is controlling and dismissive.":
                 "Very well, amazing choice. You won't even need me at this point!"
             "The uncle is stern and critical.":
                 "Not quite, give it another go."
+                $ wrong = True
                 jump level6_task
             "The aunt is nurturing and supportive.":
                 "Not quite, give it another go."
+                $ wrong = True
                 jump level6_task
             "The uncle is playful and encouraging.":
                 "Not quite, give it another go."
+                $ wrong = True
                 jump level6_task
+        if not wrong:
+            $ score += 1
     "Again, The Transition and Point only weakens the new minion."
     pov "I guess we'll have to follow up with Evidence and Explanation."
 
@@ -320,19 +371,26 @@ label level6:
 
 label level7:
     mentor "Which of the following is the best choice when transitioning from the previous sentence? (PREVIOUS SENTENCE)"
+
+    $ wrong = False
     label level7_task:
         menu:
             "The aunt is controlling and dismissive.":
                 "Nicely done!"
+                $ wrong = True
+                jump level7_task
             "The uncle is stern and critical.":
                 "Not quite, give it another go."
-                jump level7_task
             "The aunt is nurturing and supportive.":
                 "Not quite, give it another go."
+                $ wrong = True
                 jump level7_task
             "The uncle is playful and encouraging.":
                 "Not quite, give it another go."
+                $ wrong = True
                 jump level7_task
+        if not score:
+            $ score += 1
     "After selecting and explaining the quote, the protagonist defeats the second minion."
 
 
@@ -340,19 +398,25 @@ label level8:
     "The protagonist stands before the parchment once more, ready to finish the paragraph."
     mentor "A strong concluding sentence wraps up your ideas and reinforces your argument. What will yours be?"
 
+    $ wrong = False
     label level8_task:
         menu:
             "The aunt is controlling and dismissive.":
                 "Nicely done!"
+                $ wrong = True
+                jump level8_task
             "The uncle is stern and critical.":
                 "Not quite, give it another go."
+                $ wrong = True
                 jump level8_task
             "The aunt is nurturing and supportive.":
                 "Not quite, give it another go."
+                $ wrong = True
                 jump level8_task
             "The uncle is playful and encouraging.":
                 "Not quite, give it another go."
-                jump level8_task
+        if not wrong:
+            $ score += 1
     "You follow the mentor."
     mentor "Now that you have gotten a taste of what it was like to structure a simple paragraph essay, it is now your turn."
     pov "But I am not ready yet."
@@ -369,14 +433,31 @@ label level9:
     mentor "I see you have finally finished, care to go through a checklist with me?"
     pov "Ok."
 
+    # go through a list of checklist to see if user has everything, tell them ot go fix everything afterwards, tell user this part is weighted a certain %
+
 
 
     centered "[essay]"
 
+    jump level10
 
 
 label level10:
-    return
+    label triumphoforder:
+        return
+    label balanceofwords:
+        return
+    label fallintochaos:
+        return
+    label rediscover:
+        return
+    label mentorsfarewell:
+        return
+
+
+
+    if score < (score*0.75):
+
 
 
 
