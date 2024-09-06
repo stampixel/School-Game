@@ -14,8 +14,6 @@ label start: # COMPLETE
         score = 0
         total_score = 9
         side_quest = False
-    $ povname = "Kevin"
-    jump level3
 
     scene bg forest
 
@@ -29,9 +27,9 @@ label start: # COMPLETE
     narrator "You wake up from a deep sleep, disoriented, your mind a blank slate..."
     show rogue
     pov "\"Where am I?\""
-    show rogue at flip
+#     show rogue at flip
     "*You look around, trying to piece together your surroundings.*"
-    show rogue at flip
+    show rogue
 
 
     menu:
@@ -170,8 +168,8 @@ label level2: # COMPLETE
 
 label level3: # not complete, finish questions
     show bg shrooms
-    show mentor at left
-    show rogue at right
+    show mentor at right
+    show rogue at left
     with fade
     show minion
 
@@ -328,6 +326,8 @@ label level5: # COMPLETE
                 jump level5_task
         if not wrong:
             $ score += 1
+    hide minion
+    with dissolve
     "The explanation delivers a decisive strike, defeating the Chaos & Confusion Minion."
     "Well done! But your journey is far from over."
     jump level6
@@ -399,6 +399,7 @@ label level7:
         if not score:
             $ score += 1
     "After selecting and explaining the quote, the protagonist defeats the second minion."
+    jump level8
 
 
 label level8:
@@ -414,19 +415,19 @@ label level8:
     $ wrong = False
     label level8_task:
         menu:
-            "The aunt is controlling and dismissive.":
-                "Nicely done!"
-                $ wrong = True
-                jump level8_task
-            "The uncle is stern and critical.":
+            "To conclude, the uncle’s neutral stance neither discourages nor encourages Teddy’s creative endeavors, leaving him to develop independently.":
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level8_task
-            "The aunt is nurturing and supportive.":
+            "To conclude, the uncle’s playful and humorous attitude allows Teddy to explore his imagination freely without judgment.":
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level8_task
-            "In the end, the uncle’s dismissive and condescending behaviors work together to stifle Teddy’s imaginative spirit and reinforce rigid expectations of maturity and conformity.":
+            "To conclude, the uncle’s supportive and encouraging behaviors help nurture Teddy’s imaginative spirit and foster creativity.":
+                "Not quite, give it another go."
+                $ wrong = True
+                jump level8_task
+            "To conclude, the uncle’s dismissive and condescending behaviors work together to stifle Teddy’s imaginative spirit and reinforce rigid expectations of maturity and conformity.":
                 "Good job!"
 
         if not wrong:
@@ -441,9 +442,8 @@ label level8:
     jump level9
 
 label level9:
-    $ essay = renpy.input("Paste essay")
+    $ essay = renpy.input("Paste essay: ")
 
-#     character writes their own essay
     mentor "I see you have finally finished, care to go through a checklist with me?"
     pov "Ok."
 
@@ -506,6 +506,8 @@ label level10:
         pov "So, there’s still more to learn?"
         mentor "Always. You’ve taken important steps forward, but writing—and learning—are ongoing journeys. Keep refining your skills, and one day, Literaria will fully shine under your care."
 
+        jump endscreen
+
     label fallintochaos:
         "Chaos & Confusion, now strengthened by the protagonist’s failure to grasp key writing principles, swirl in the air. The once vibrant world of Literaria is slowly consumed by darkness."
         pov "No… I can’t stop them."
@@ -514,31 +516,7 @@ label level10:
         pov "I… I wasn’t careful enough."
         "The world continues to unravel, spiraling into chaos."
         mentor "Remember this feeling, and take it with you. Diligence, attention to detail—these are the tools to keep chaos at bay. There is always a chance to rebuild, but first, you must learn from your mistakes."
-
-#     label rediscover:
-#         "Chaos & Confusion are defeated, but instead of celebrating, the protagonist stands in quiet reflection. The world of Literaria has been restored, but something within feels different."
-#         pov "It wasn’t just about defeating Chaos & Confusion, was it? This whole journey… it was about me."
-#         mentor "Yes. The true battle wasn’t against external forces—it was with your own self-doubt. Through mastering the art of writing, you found order, not just in Literaria, but within yourself."
-#         "The protagonist stands with the Magical Quill in hand, feeling more connected to their inner thoughts than ever before."
-#         pov "I’ve grown… not just as a writer, but as a person. I understand myself better now."
-#         mentor "Writing is a reflection of the self. By organizing your thoughts on paper, you have also discovered the balance within. Never forget that writing is not just a tool for communication, but a path to self-discovery."
-
-#     label mentorsfarewell:
-#         "The final essay is complete, and Literaria stands restored in all its brilliance. The Mentor, however, gazes at the protagonist with a knowing look."
-#         pov "We did it. Literaria is saved."
-#         mentor "Yes, you have brought balance back to this world. But there is something more important we must discuss."
-#         pov "What do you mean?"
-#         "The Mentor smiles gently, the edges of their form starting to fade."
-#         mentor "You no longer need my guidance. You have learned all I can teach you, and now you are ready to pass on this knowledge to others."
-#         pov "Wait, you’re leaving?"
-#         mentor "It’s time. I have been the guide for many, but the world needs new mentors. You are ready for that role."
-#         "The Mentor fades into the pages of a book, leaving the protagonist standing alone, but with a new sense of purpose. A young student approaches, curious about the world of Literaria."
-#         # CHANGE THIS PART
-#         Young Student: "Can you help me learn?"
-#         Protagonist: "Of course. Here, take the Magical Quill. Let’s begin your journey."
-#         Narrator: "The cycle of knowledge continues, and with it, the legacy of Literaria. The protagonist has become the Mentor, passing on the wisdom to the next generation."
-
-
+        jump endscreen
 
     if score > (score*0.75):
         jump triumphoforder
