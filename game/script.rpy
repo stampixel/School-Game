@@ -13,7 +13,7 @@ label start: # COMPLETE
     python:
         score = 0
         total_score = 9
-        side_quest = False
+        sidequest = False
 
     scene bg forest
 
