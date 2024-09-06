@@ -1,9 +1,4 @@
-﻿# The script of the game goes in this file.
-
-# Declare characters used by this game. The color argument colorizes the
-# name of the character.
-
-define e = Character("Eileen")
+﻿define e = Character("Eileen")
 define pov = Character("[povname]",default="Me", image="prot")
 define narrator = Character("")
 define mystery = Character("???")
@@ -14,19 +9,13 @@ python:
     total_score = 9
     side_quest = False
 
-
 init:
     transform flip:
         xzoom -1.0
 
 label start:
-# Define an alternate to povname just incase it doesnt work
     $ povname = "Kevin"
     jump level3
-
-    # Show a background. This uses a placeholder by default, but you can
-    # add a file (named either "bg room.png" or "bg room.jpg") to the
-    # images directory to show it.
 
     scene bg forest
 
@@ -447,6 +436,39 @@ label level10:
         "You stand tall, having mastered every challenge. Chaos & Confusion, weakened and trembling, slowly fade into nothingness."
         pov "It’s over. The chaos is gone."
         mentor "Indeed. You’ve done it. You have restored order and clarity to Literaria."
+        python:
+            if sidequest:
+                mentor "Say, remember what I told you earlier, the truth about Literaria?"
+                pov "Yes. What now?"
+                mentor "Well, it is time to make the decision, you have proved to myself that you yourself, is capable of guarding this land."
+                menu:
+                    "Take over Literaria for all its glory.":
+                        "The Mentor smiles gently, the edges of their form starting to fade."
+                        mentor "Then you no longer need my guidance. You have learned all I can teach you, and now you are ready to pass on this knowledge to others."
+                        pov "What do you mean?"
+                        "The Mentor smiles gently, the edges of their form starting to fade."
+                        mentor "You no longer need my guidance. You have learned all I can teach you, and now you are ready to pass on this knowledge to others."
+                        pov "Wait, you’re leaving?"
+                        mentor "It’s time. I have been the guide for many, but the world needs new mentors. You are ready for that role."
+                        "The Mentor fades into the pages of a book, leaving the protagonist standing alone, but with a new sense of purpose. A young student approaches, curious about the world of Literaria."
+
+                        jump endscreen
+
+                    "Walk away...":
+                        "You look at the Magical Quill, feeling its immense power. But something within you stirs—a pull toward a different path."
+                        pov "I’m not ready to stay here. This isn’t my place. I belong elsewhere."
+                        "The Mentor’s eyes widen slightly in surprise, but then he smiles, understanding dawning in his expression."
+                        Mentor: "You’ve learned much, more than you realize. But perhaps your journey doesn’t end here. Sometimes, the greatest wisdom is knowing when to step away."
+                        "The Mentor steps back, the world around you beginning to shimmer and blur."
+                        mentor "If you choose to leave, Literaria will continue on its own. But the knowledge you’ve gained here will go with you, shaping you in ways beyond this world. Perhaps... this was never about Literaria at all, but about your own growth."
+                        "As the words hang in the air, the scene begins to dissolve. The Mentor’s voice echoes softly as everything fades."
+                        mentor "Farewell, traveler. May the words you’ve mastered here guide you wherever you go."
+                        "Suddenly, the protagonist wakes up in their own bed, sunlight streaming through the window. The magical world of Literaria is gone, replaced by the familiar sights and sounds of the real world. But something feels different—a newfound clarity, a deeper understanding."
+                        "You’ve returned to reality, but Literaria still lingers in your heart. The skills you’ve gained, the lessons you’ve learned—they remain, ready to be applied in your life."
+                        centered "Sometimes, the real adventure begins once the dream ends. The world you now face is yours to shape, using the knowledge you’ve earned along the way."
+
+                        jump endscreen
+
         "The world around you brightens. You stand atop a grand library tower, overlooking a land where words and essays flow like rivers of knowledge.""
         mentor "You are now the Master of Composition. Remember, the power of structure and clarity is not just in writing but in all things. What you’ve learned here will guide you, both in Literaria and in the world beyond."
         pov "I didn’t just defeat chaos… I learned how to communicate with purpose."
@@ -469,32 +491,42 @@ label level10:
         "The world continues to unravel, spiraling into chaos."
         mentor "Remember this feeling, and take it with you. Diligence, attention to detail—these are the tools to keep chaos at bay. There is always a chance to rebuild, but first, you must learn from your mistakes."
 
-    label rediscover:
-        "Chaos & Confusion are defeated, but instead of celebrating, the protagonist stands in quiet reflection. The world of Literaria has been restored, but something within feels different."
-        pov "It wasn’t just about defeating Chaos & Confusion, was it? This whole journey… it was about me."
-        mentor "Yes. The true battle wasn’t against external forces—it was with your own self-doubt. Through mastering the art of writing, you found order, not just in Literaria, but within yourself."
-        "The protagonist stands with the Magical Quill in hand, feeling more connected to their inner thoughts than ever before."
-        pov "I’ve grown… not just as a writer, but as a person. I understand myself better now."
-        mentor "Writing is a reflection of the self. By organizing your thoughts on paper, you have also discovered the balance within. Never forget that writing is not just a tool for communication, but a path to self-discovery."
+#     label rediscover:
+#         "Chaos & Confusion are defeated, but instead of celebrating, the protagonist stands in quiet reflection. The world of Literaria has been restored, but something within feels different."
+#         pov "It wasn’t just about defeating Chaos & Confusion, was it? This whole journey… it was about me."
+#         mentor "Yes. The true battle wasn’t against external forces—it was with your own self-doubt. Through mastering the art of writing, you found order, not just in Literaria, but within yourself."
+#         "The protagonist stands with the Magical Quill in hand, feeling more connected to their inner thoughts than ever before."
+#         pov "I’ve grown… not just as a writer, but as a person. I understand myself better now."
+#         mentor "Writing is a reflection of the self. By organizing your thoughts on paper, you have also discovered the balance within. Never forget that writing is not just a tool for communication, but a path to self-discovery."
 
-    label mentorsfarewell:
-        "The final essay is complete, and Literaria stands restored in all its brilliance. The Mentor, however, gazes at the protagonist with a knowing look."
-        pov "We did it. Literaria is saved."
-        mentor "Yes, you have brought balance back to this world. But there is something more important we must discuss."
-        pov "What do you mean?"
-        "The Mentor smiles gently, the edges of their form starting to fade."
-        mentor "You no longer need my guidance. You have learned all I can teach you, and now you are ready to pass on this knowledge to others."
-        pov "Wait, you’re leaving?"
-        mentor "It’s time. I have been the guide for many, but the world needs new mentors. You are ready for that role."
-        "The Mentor fades into the pages of a book, leaving the protagonist standing alone, but with a new sense of purpose. A young student approaches, curious about the world of Literaria."
-        # CHANGE THIS PART
-        Young Student: "Can you help me learn?"
-        Protagonist: "Of course. Here, take the Magical Quill. Let’s begin your journey."
-        Narrator: "The cycle of knowledge continues, and with it, the legacy of Literaria. The protagonist has become the Mentor, passing on the wisdom to the next generation."
+#     label mentorsfarewell:
+#         "The final essay is complete, and Literaria stands restored in all its brilliance. The Mentor, however, gazes at the protagonist with a knowing look."
+#         pov "We did it. Literaria is saved."
+#         mentor "Yes, you have brought balance back to this world. But there is something more important we must discuss."
+#         pov "What do you mean?"
+#         "The Mentor smiles gently, the edges of their form starting to fade."
+#         mentor "You no longer need my guidance. You have learned all I can teach you, and now you are ready to pass on this knowledge to others."
+#         pov "Wait, you’re leaving?"
+#         mentor "It’s time. I have been the guide for many, but the world needs new mentors. You are ready for that role."
+#         "The Mentor fades into the pages of a book, leaving the protagonist standing alone, but with a new sense of purpose. A young student approaches, curious about the world of Literaria."
+#         # CHANGE THIS PART
+#         Young Student: "Can you help me learn?"
+#         Protagonist: "Of course. Here, take the Magical Quill. Let’s begin your journey."
+#         Narrator: "The cycle of knowledge continues, and with it, the legacy of Literaria. The protagonist has become the Mentor, passing on the wisdom to the next generation."
 
 
 
-    if score < (score*0.75):
+    if score > (score*0.75):
+        jump triumphoforder
+    elif score > (score*0.5):
+        jump balanceofwords
+    else:
+        jump fallintochaos
+
+label endscreen:
+    return
+
+
 
 
 
