@@ -1,4 +1,7 @@
-﻿define e = Character("Eileen")
+﻿# font
+# self point
+
+define e = Character("Eileen")
 define pov = Character("[povname]",default="Me", image="prot")
 define narrator = Character("")
 define mystery = Character("???")
@@ -27,7 +30,6 @@ label start: # COMPLETE
     narrator "You wake up from a deep sleep, disoriented, your mind a blank slate..."
     show rogue
     pov "\"Where am I?\""
-#     show rogue at flip
     "*You look around, trying to piece together your surroundings.*"
     show rogue
 
@@ -336,6 +338,8 @@ label level5: # COMPLETE
 
 
 label level6:
+    # new bg, fix questions
+
     "With the first minion defeated, the protagonist moves forward, encountering another representing \"Weak Transitions.\""
     mentor "To move smoothly between ideas, a strong transition is key. Let’s identify your second character trait and introduce it."
     label level6_replay:
@@ -370,7 +374,7 @@ label level6:
 
     jump level7
 
-label level7:
+label level7: # COMPLETE
     label level7_replay:
         mentor "Which of the following is the best choice when transitioning from the previous phrase, remember to think back to PEE. (Moreover, the uncle's condescending attitude is evident when he says)"
         menu:
@@ -402,8 +406,11 @@ label level7:
     jump level8
 
 
-label level8:
-    "The protagonist stands before the parchment once more, ready to finish the paragraph."
+label level8: # COMPLETE
+
+    # add bg
+
+    mentor "Having gone through everything, it is time to finish the paragraph."
     label level8_replay:
         mentor "A strong concluding sentence wraps up your ideas and reinforces your arguments. What will yours be?"
         menu:
@@ -526,7 +533,7 @@ label level10:
         jump fallintochaos
 
 label endscreen:
-    return
+    # show stats, once your done get user to save screenshot
 
 
 
