@@ -1,12 +1,12 @@
 ﻿# font
 # self point
+# maybe add transitions of pov fighting with minion
 
-define e = Character("Eileen")
-define pov = Character("[povname]",default="Me", image="prot")
-define narrator = Character("")
+define pov = Character("[povname]",default="Me", image="prot", color="#6f22e3")
 define mystery = Character("???")
-define mentor = Character("Mentor")
-
+define mentor = Character("Mentor", color="#4aeb42")
+define gui.text_color = '#000000'
+define gui.interface_text_color = '#000000'
 
 init:
     transform flip:
@@ -155,7 +155,8 @@ label level2: # COMPLETE
         if rating == "1" or rating == "2" or rating == "3":
              $ wrong = True
         else:
-            $ score += 1
+            if not wrong:
+                $ score += 1
 
     "The mystery force judges your writing, the parchment glows slightly."
     "You hear movement, turning back, the stone wall shifts, creating an exit."
@@ -173,7 +174,9 @@ label level3: # not complete, finish questions
     show mentor at right
     show rogue at left
     with fade
+    pause(1.0)
     show minion
+    with fade
 
     pov "WHAT is that?"
     mentor "That is a Chaos & Confusion Minion that embodies \"Vague Argument.\""
@@ -215,8 +218,8 @@ label level4: # COMPLETE
     mentor "Don't worry kid, I have another trick up my sleeves."
     mentor "Riddle me this: Dawn comes after night like ________ comes after Point."
 
+    $ wrong = False
     label level4_question:
-        $ wrong = False
         menu:
             "Explanation":
                 mentor "Maybe if you used more than just two fingers..."
@@ -287,7 +290,7 @@ label sidequest: # COMPLETE
             "The world reverts back to normal. You can feel the cool breeze of the wind, it flows around and you feel comfort."
             mentor "Now, where were we?"
             mentor "To truly defeat the minion, you must explain how this evidence supports your point."
-            $ side_quest = True
+            $ sidequest = True
         "Forget what happened.":
             mentor "Very well. Although hard to make, the choice is indeed a valid one at times."
             "Your mind turns blank for a second."
@@ -337,10 +340,14 @@ label level5: # COMPLETE
 
 
 
-label level6:
-    # new bg, fix questions
+label level6: # COMPLETE
+    show bg grass
+    with fade
 
     "With the first minion defeated, the protagonist moves forward, encountering another representing \"Weak Transitions.\""
+    show skeleton
+    with fade
+
     mentor "To move smoothly between ideas, a strong transition is key. Let’s identify your second character trait and introduce it."
     label level6_replay:
         mentor "Which of the following transitions make the sentences flow while also strengthening the root argument, adding a second point?"
@@ -355,15 +362,15 @@ label level6:
         menu:
             "Moreover, the uncle's condescending attitude is evident when he says...":
                 "Very well, amazing choice. You won't even need me at this point!"
-            "The uncle is stern and critical.":
+            "The uncle's condescending attitude is evident when he says...":
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level6_task
-            "The aunt is nurturing and supportive.":
+            "Condescending is also an attitude shown by the uncle...":
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level6_task
-            "The uncle is playful and encouraging.":
+            "To add, the uncle's mean attitude towards Teddy is evident...":
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level6_task
@@ -402,13 +409,16 @@ label level7: # COMPLETE
                 jump level7_task
         if not score:
             $ score += 1
+    hide skeleton
+    with dissolve
     "After selecting and explaining the quote, the protagonist defeats the second minion."
     jump level8
 
 
 label level8: # COMPLETE
 
-    # add bg
+    show bg end
+    with fade
 
     mentor "Having gone through everything, it is time to finish the paragraph."
     label level8_replay:
@@ -449,22 +459,136 @@ label level8: # COMPLETE
     jump level9
 
 label level9:
-    $ essay = renpy.input("Paste essay: ")
+
+    label level9_para:
+        centered "Come back after you finished"
+
+        menu:
+            "Finished.":
+                pass
+            "Not finished yet.":
+                jump level9_para
+
 
     mentor "I see you have finally finished, care to go through a checklist with me?"
     pov "Ok."
 
+    centered "Feel free to switch over to the doc if you need another look at your essay. Self checking does not count towards total score."
+
     # go through a list of checklist to see if user has everything, tell them ot go fix everything afterwards, tell user this part is weighted a certain %
+    centered "Have you identified at least two character traits of Teddy?"
+    menu:
+        "Yes":
+            pass
+        "No":
+            pass
 
+    centered "Have you included a PEE for each of the character traits?"
+    menu:
+        "Yes":
+            pass
+        "No":
+            pass
+    centered "I have structured the paragraph properly? (Topic sentence, PEE, PEE, concluding sentence)"
+    menu:
+        "Yes":
+            pass
+        "No":
+            pass
+    centered "Not included any first person pronouns."
+    menu:
+        "No, there are no first person pronouns in the paragraph.":
+            pass
+        "Yes, there are first person pronouns present.":
+            pass
+    centered "I properly cited quotes in MLA format."
+    menu:
+        "Yes":
+            pass
+        "No":
+            pass
+    centered "I effectively used transition words throughout the paragraph."
+    menu:
+        "Yes":
+            pass
+        "No":
+            pass
+    centered "Is your paragraph clear, organized, and easy to follow?"
+    menu:
+        "Yes":
+            pass
+        "No":
+            pass
+    centered "Did you proofread for grammar, spelling, and punctuation?"
+    menu:
+        "Yes":
+            pass
+        "No":
+            pass
 
+    centered "Now turn to a peer and have them check over your work, this part will count towards your total score the most, so make sure you corrected any errors."
 
-    centered "[essay]"
+    $ paragraph_points = 0
+    $ paragraph_total_points = 8
+
+    centered "Identified at least two character traits of Teddy?"
+    menu:
+        "Yes":
+            $ paragraph_points += 1
+        "No":
+            pass
+
+    centered "Included a PEE for each of the character traits?"
+    menu:
+        "Yes":
+            $ paragraph_points += 1
+        "No":
+            pass
+    centered "Structured the paragraph properly? (Topic sentence, PEE, PEE, concluding sentence)"
+    menu:
+        "Yes":
+            $ paragraph_points += 1
+        "No":
+            pass
+    centered "Not included any first person pronouns."
+    menu:
+        "No, there are no first person pronouns in the paragraph.":
+            $ paragraph_points += 1
+        "Yes, there are first person pronouns present.":
+            pass
+    centered "Properly cited quotes in MLA format."
+    menu:
+        "Yes":
+            $ paragraph_points += 1
+        "No":
+            pass
+    centered "Effectively used transition words throughout the paragraph."
+    menu:
+        "Yes":
+            $ paragraph_points += 1
+        "No":
+            pass
+    centered "Paragraph is clear, organized, and easy to follow."
+    menu:
+        "Yes":
+            $ paragraph_points += 1
+        "No":
+            pass
+    centered "No grammar, spelling, and/or punctuation errors."
+    menu:
+        "No, the sentence is clear of any grammar, spelling, and punctuation errors.":
+            $ paragraph_points += 1
+        "Yes, there are mistakes present.":
+            pass
+
 
     jump level10
 
 
 label level10:
     label triumphoforder:
+        show bg triumph
+        with fade
         "You stand tall, having mastered every challenge. Chaos & Confusion, weakened and trembling, slowly fade into nothingness."
         pov "It’s over. The chaos is gone."
         mentor "Indeed. You’ve done it. You have restored order and clarity to Literaria."
@@ -504,8 +628,11 @@ label level10:
         mentor "You are now the Master of Composition. Remember, the power of structure and clarity is not just in writing but in all things. What you’ve learned here will guide you, both in Literaria and in the world beyond."
         pov "I didn’t just defeat chaos… I learned how to communicate with purpose."
         "As you gaze upon the restored Literaria, you feel the weight of your accomplishment. A message echoes in your mind: Structure and clarity are the keys to success, both in writing and in life."
+        jump endscreen
 
     label balanceofwords:
+        show bg balance
+        with fade
         "Chaos & Confusion have been weakened, but remnants of disorder still linger. Literaria is partially restored—some areas flourish, while others remain clouded in shadow."
         pov "I tried my best, but it wasn’t enough to completely restore the world."
         mentor "You accomplished much. Literaria is thriving in many places, but remember: perfection isn’t the goal. The process of improvement never truly ends."
@@ -516,6 +643,8 @@ label level10:
         jump endscreen
 
     label fallintochaos:
+        show bg lost
+        with fade
         "Chaos & Confusion, now strengthened by the protagonist’s failure to grasp key writing principles, swirl in the air. The once vibrant world of Literaria is slowly consumed by darkness."
         pov "No… I can’t stop them."
         "Fragments of sentences and broken essays rise up, engulfing the land. The Mentor watches, their expression somber."
@@ -525,15 +654,31 @@ label level10:
         mentor "Remember this feeling, and take it with you. Diligence, attention to detail—these are the tools to keep chaos at bay. There is always a chance to rebuild, but first, you must learn from your mistakes."
         jump endscreen
 
-    if score > (score*0.75):
+    python:
+        user_score = score + paragraph_points
+        total_combined_score = total_score + paragraph_total_points
+
+    if (user_score > 13):
         jump triumphoforder
-    elif score > (score*0.5):
+    elif user_score > 9:
         jump balanceofwords
     else:
         jump fallintochaos
 
 label endscreen:
-    # show stats, once your done get user to save screenshot
+    $ display_score = f"{score}/{total_score}"
+    $ display_para_score = f"{paragraph_points}/{paragraph_total_points}"
+
+    show bg end
+    show screen StatsUI
+    with fade
+    "You've completed the game, if you would like to save your results, please take a screenshot!"
+
+    menu:
+        "Show stats again.":
+            jump endscreen
+        "Exit game.":
+            pass
 
 
 
