@@ -19,6 +19,8 @@ label start: # COMPLETE
         sidequest = False
 
     scene bg forest
+    centered "IF AT ANY TIME YOU CAN NOT FINISH, SAVE THE GAME BY CLICKING \"esc\" ON YOUR KEYBOARD." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
+    centered "Your overall score has an impact on outcome of story." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
 
     python:
         povname = renpy.input("What is your name?", length=32)
@@ -278,7 +280,7 @@ label sidequest: # COMPLETE
     mentor "I am not just a guide in this world, not just a teacher showing you the ways of Literaria. I am its creator."
     "The words hang in the air, their weight sinking in slowly. The Mentor—your trusted companion throughout this journey—created Literaria? The realization stirs a mix of emotions within you: awe, confusion, and a hint of fear."
     pov "You… created this world? But why? Why reveal this to me now?"
-    mentor "Literaria is more than just a land of stories; it is a delicate balance of knowledge, creativity, and truth. I brought it into existence to help others learn, to give life to the lessons within stories. But every world needs a guardian, someone to maintain that balance and protect it from chaos."
+    mentor "Literaria is more than just a land of stories; it is a delicate balance of knowledge, creativity, and truth. I brought it into existence to help others learn, to give life to the lessons within stories."
     "The Mentor pauses, looking into your eyes with a seriousness that makes your heart race."
     mentor "I will give you two options. Either forget the ugly truth or keep fighting knowing everything around you is planned and fictional."
     "The Mentor steps back slightly, raising their hand as two glowing orbs appear between you. Each orb pulses with a different energy, radiating a sense of immense power and responsibility."
@@ -393,16 +395,16 @@ label level7: # COMPLETE
     $ wrong = False
     label level7_task:
         menu:
-            "‘You’re wasting your time with those toys,’ implying that Teddy should outgrow his creative pursuits. This remark not only undermines Teddy’s imagination but also implies that creativity is childish and unworthy of respect.":
+            "‘You’re wasting your time with those toys,’ implying that Teddy should outgrow his creative pursuits. This remark not only undermines Teddy’s imagination but also implies that creativity is childish and unworthy of respect."(what_size=22):
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level7_task
             "\"You're too old for such nonsense,\" implying that Teddy should outgrow his creative pursuits. This remark not only undermines Teddy’s imagination but also implies that creativity is childish and unworthy of respect.":
                 "Nicely done, good choice!"
-            "‘Only babies build forts,’ implying that Teddy should outgrow his creative pursuits. This remark not only undermines Teddy’s imagination but also implies that creativity is childish and unworthy of respect.":
-                "Not quite, give it another go."
-                $ wrong = True
-                jump level7_task
+#             "‘Only babies build forts,’ implying that Teddy should outgrow his creative pursuits. This remark not only undermines Teddy’s imagination but also implies that creativity is childish and unworthy of respect.":
+#                 "Not quite, give it another go."
+#                 $ wrong = True
+#                 jump level7_task
             "‘Why don’t you read a book instead?’ implying that Teddy should outgrow his creative pursuits. This remark not only undermines Teddy’s imagination but also implies that creativity is childish and unworthy of respect.":
                 "Not quite, give it another go."
                 $ wrong = True
@@ -453,128 +455,132 @@ label level8: # COMPLETE
     mentor "Now that you have gotten a taste of what it was like to structure a simple paragraph essay, it is now your turn."
     pov "But I am not ready yet."
     mentor "You won't know unless you actually try."
-    mentor "using the example essay we came up with, write your own, this time, on Teddy from \"The Fall of a City\""
-    pov "Here goes... (I should write it in Google docs instead...)"
+    mentor "Using the following exemplar essay we came up with, write your own, this time, on Teddy from \"The Fall of a City.\""
+    pov "Here goes... (I should write my essay about Teddy in a Google docs...)"
+
+    label level8_exemplar:
+#         centered "Teddy’s uncle in The Fall of a City is portrayed as both dismissive and condescending, which ultimately diminishes Teddy’s sense of imagination and self-worth. One clear example of the uncle's dismissive nature occurs when he mocks Teddy’s imaginative play, stating, “Only fools and cowards build forts out of paper boxes” (Nowlan). By belittling Teddy’s creation, the uncle invalidates Teddy’s imaginative world, discouraging his creative expression. Moreover, the uncle's condescending attitude is evident when he says, “You're too old for such nonsense,” implying that Teddy should outgrow his creative pursuits. This remark not only undermines Teddy’s imagination but also implies that creativity is childish and unworthy of respect. In the end, the uncle’s dismissive and condescending behaviors work together to stifle Teddy’s imaginative spirit and reinforce rigid expectations of maturity and conformity." (what_color="#FFFFFF", what_size=40)
+        show screen Exemplar
+        ""
+        hide screen Exemplar
+        menu:
+            "View exemplar.":
+                jump level8_exemplar
+            "Finished.":
+                hide screen Exemplar
 
     jump level9
 
 label level9:
 
-    label level9_para:
-        centered "Come back after you finished"
 
-        menu:
-            "Finished.":
-                pass
-            "Not finished yet.":
-                jump level9_para
 
 
     mentor "I see you have finally finished, care to go through a checklist with me?"
     pov "Ok."
 
-    centered "Feel free to switch over to the doc if you need another look at your essay. Self checking does not count towards total score."
+    centered "Feel free to switch over to the doc if you need another look at your essay. Self checking does not count towards total score." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
 
     # go through a list of checklist to see if user has everything, tell them ot go fix everything afterwards, tell user this part is weighted a certain %
-    centered "Have you identified at least two character traits of Teddy?"
+    centered "Have you identified at least two character traits of Teddy?" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
     menu:
         "Yes":
             pass
         "No":
             pass
 
-    centered "Have you included a PEE for each of the character traits?"
+    centered "Have you included a PEE for each of the character traits?" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
     menu:
         "Yes":
             pass
         "No":
             pass
-    centered "I have structured the paragraph properly? (Topic sentence, PEE, PEE, concluding sentence)"
+    centered "I have structured the paragraph properly? (Topic sentence, PEE, PEE, concluding sentence)" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
     menu:
         "Yes":
             pass
         "No":
             pass
-    centered "Not included any first person pronouns."
+    centered "Not included any first person pronouns." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
     menu:
         "No, there are no first person pronouns in the paragraph.":
             pass
         "Yes, there are first person pronouns present.":
             pass
-    centered "I properly cited quotes in MLA format."
+    centered "I properly cited quotes in MLA format." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
     menu:
         "Yes":
             pass
         "No":
             pass
-    centered "I effectively used transition words throughout the paragraph."
+    centered "I effectively used transition words throughout the paragraph." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
     menu:
         "Yes":
             pass
         "No":
             pass
-    centered "Is your paragraph clear, organized, and easy to follow?"
+    centered "Is your paragraph clear, organized, and easy to follow?" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
     menu:
         "Yes":
             pass
         "No":
             pass
-    centered "Did you proofread for grammar, spelling, and punctuation?"
+    centered "Did you proofread for grammar, spelling, and punctuation?" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
     menu:
         "Yes":
             pass
         "No":
             pass
 
-    centered "Now turn to a peer and have them check over your work, this part will count towards your total score the most, so make sure you corrected any errors."
+    centered "Now turn to a peer and have them check over your work, this part will count towards your total score the most, so make sure you corrected any errors." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
 
     $ paragraph_points = 0
     $ paragraph_total_points = 8
 
-    centered "Identified at least two character traits of Teddy?"
+    centered "Identified at least two character traits of Teddy?" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
     menu:
         "Yes":
             $ paragraph_points += 1
         "No":
             pass
 
-    centered "Included a PEE for each of the character traits?"
+    centered "Included a PEE for each of the character traits?" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
     menu:
         "Yes":
             $ paragraph_points += 1
         "No":
             pass
-    centered "Structured the paragraph properly? (Topic sentence, PEE, PEE, concluding sentence)"
+    centered "Structured the paragraph properly? (Topic sentence, PEE, PEE, concluding sentence)" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
     menu:
         "Yes":
             $ paragraph_points += 1
         "No":
             pass
-    centered "Not included any first person pronouns."
+    centered "Not included any first person pronouns." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
     menu:
         "No, there are no first person pronouns in the paragraph.":
             $ paragraph_points += 1
         "Yes, there are first person pronouns present.":
             pass
-    centered "Properly cited quotes in MLA format."
+    centered "Properly cited quotes in MLA format." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
     menu:
         "Yes":
             $ paragraph_points += 1
         "No":
             pass
-    centered "Effectively used transition words throughout the paragraph."
+    centered "Effectively used transition words throughout the paragraph." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
     menu:
         "Yes":
             $ paragraph_points += 1
         "No":
             pass
-    centered "Paragraph is clear, organized, and easy to follow."
+    centered "Paragraph is clear, organized, and easy to follow." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
     menu:
         "Yes":
             $ paragraph_points += 1
         "No":
             pass
-    centered "No grammar, spelling, and/or punctuation errors."
+    centered "No grammar, spelling, and/or punctuation errors." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
     menu:
         "No, the sentence is clear of any grammar, spelling, and punctuation errors.":
             $ paragraph_points += 1
@@ -586,6 +592,17 @@ label level9:
 
 
 label level10:
+    python:
+        user_score = score + paragraph_points
+        total_combined_score = total_score + paragraph_total_points
+
+    if (user_score > 13):
+        jump triumphoforder
+    elif user_score > 9:
+        jump balanceofwords
+    else:
+        jump fallintochaos
+
     label triumphoforder:
         show bg triumph
         with fade
@@ -606,7 +623,7 @@ label level10:
                     pov "Wait, you’re leaving?"
                     mentor "It’s time. I have been the guide for many, but the world needs new mentors. You are ready for that role."
                     "The Mentor fades into the pages of a book, leaving the protagonist standing alone, but with a new sense of purpose. A young student approaches, curious about the world of Literaria."
-
+                    centered "ENDING 1/5" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
                     jump endscreen
 
                 "Walk away...":
@@ -620,14 +637,15 @@ label level10:
                     mentor "Farewell, traveler. May the words you’ve mastered here guide you wherever you go."
                     "Suddenly, the protagonist wakes up in their own bed, sunlight streaming through the window. The magical world of Literaria is gone, replaced by the familiar sights and sounds of the real world. But something feels different—a newfound clarity, a deeper understanding."
                     "You’ve returned to reality, but Literaria still lingers in your heart. The skills you’ve gained, the lessons you’ve learned—they remain, ready to be applied in your life."
-                    centered "Sometimes, the real adventure begins once the dream ends. The world you now face is yours to shape, using the knowledge you’ve earned along the way."
-
+                    centered "Sometimes, the real adventure begins once the dream ends. The world you now face is yours to shape, using the knowledge you’ve earned along the way." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
+                    centered "ENDING 2/5" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
                     jump endscreen
 
         "The world around you brightens. You stand atop a grand library tower, overlooking a land where words and essays flow like rivers of knowledge."
         mentor "You are now the Master of Composition. Remember, the power of structure and clarity is not just in writing but in all things. What you’ve learned here will guide you, both in Literaria and in the world beyond."
         pov "I didn’t just defeat chaos… I learned how to communicate with purpose."
         "As you gaze upon the restored Literaria, you feel the weight of your accomplishment. A message echoes in your mind: Structure and clarity are the keys to success, both in writing and in life."
+        centered "ENDING 3/5" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
         jump endscreen
 
     label balanceofwords:
@@ -639,7 +657,7 @@ label level10:
         "The protagonist looks out at the partially restored world, with pockets of chaos still swirling in the distance."
         pov "So, there’s still more to learn?"
         mentor "Always. You’ve taken important steps forward, but writing—and learning—are ongoing journeys. Keep refining your skills, and one day, Literaria will fully shine under your care."
-
+        centered "ENDING 4/5" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
         jump endscreen
 
     label fallintochaos:
@@ -652,18 +670,8 @@ label level10:
         pov "I… I wasn’t careful enough."
         "The world continues to unravel, spiraling into chaos."
         mentor "Remember this feeling, and take it with you. Diligence, attention to detail—these are the tools to keep chaos at bay. There is always a chance to rebuild, but first, you must learn from your mistakes."
+        centered "ENDING 5/5" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
         jump endscreen
-
-    python:
-        user_score = score + paragraph_points
-        total_combined_score = total_score + paragraph_total_points
-
-    if (user_score > 13):
-        jump triumphoforder
-    elif user_score > 9:
-        jump balanceofwords
-    else:
-        jump fallintochaos
 
 label endscreen:
     $ display_score = f"{score}/{total_score}"
@@ -673,6 +681,7 @@ label endscreen:
     show screen StatsUI
     with fade
     "You've completed the game, if you would like to save your results, please take a screenshot!"
+    "Press \"esc\" and save your game into a slot so you can show off your results!"
 
     menu:
         "Show stats again.":
