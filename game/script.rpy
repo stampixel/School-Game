@@ -103,7 +103,7 @@ label level1: # COMPLETE
                 "Do you choose to enter?"
                 menu:
                     "Yes":
-                        pov "Have you every been through one of these? Where would we end up?"
+                        pov "Have you ever been through one of these? Where would we end up?"
                         mentor "Theres only one way to find out. "
                         "You hesitantly step in, one foot at a time."
                         jump level2
@@ -228,7 +228,7 @@ label level4: # COMPLETE
                 $ wrong = True
                 jump level4_question
             "Evidence":
-                mentor "Well spoken! Goodly done, young one! Let us employ that as our stratagem to vanquish the minion."
+                mentor "Well spoken! Let's defeat the minion using that."
         if not wrong:
             $ score += 1
 
@@ -253,7 +253,7 @@ label level4: # COMPLETE
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level4_task
-            "“Only fools and cowards build forts out of paper boxes”":
+            "“The next thing we know, you’ll be wanting us to put skirts on you!”":
                 "Guided by your hands, the quill moves swiftly across the air."
             "“They looked pretty much like paper dolls to me.”":
                 "Not quite, give it another go."
@@ -307,7 +307,7 @@ label level5: # COMPLETE
     "You face the now weakened minion, ready for the final blow."
 
     label level5_replay:
-        mentor "Now, explain how the quote you selected proves the character trait (“Only fools and cowards build forts out of paper boxes”). Choose the best answer."
+        mentor "Now, explain how the quote you selected proves the character trait (“The next thing we know, you’ll be wanting us to put skirts on you!”). Choose the best answer."
         menu:
             "What was that again?":
                 jump level5_replay
@@ -687,7 +687,7 @@ label endscreen:
         "Show stats again.":
             jump endscreen
         "Exit game.":
-            pass
+            return
 
 
 
