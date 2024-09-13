@@ -86,10 +86,10 @@ label level1: # COMPLETE
     show bg portal
     with fade
 
-    "Your feet are sour and your mouth is dry. Time seems to work differently in this universe. You felt as though you have been walking for hours."
+    "Your feet are sore and your mouth is dry. Time seems to work differently in this universe. You felt as though you have been walking for hours."
     "You and your Mentor stand in front of a grand, mystical portal that swirls with images from the story \"The Fall of a City.\""
     mentor "This seems to be where all the Confusion and Chaos originates from."
-    mentor "Your first task is to identify two key character traits of Teddy’s uncle. Their traits hold the power to influence the structure of your essay."
+    mentor "Your first task is to identify two key character traits of Teddy’s uncle. Their traits hold the power to influence the structure of your paragraph."
     "The portal shows scenes from the story, with the uncle interacting with Teddy."
     "You see the way they speak and act—what do you observe?"
 
@@ -136,7 +136,7 @@ label level2: # COMPLETE
     with move
 
     label level2_replay:
-        mentor "A strong essay needs a clear and focused topic sentence. Use the traits you've identified earlier to create one. (Teddy’s uncle is both dismissive and condescending)"
+        mentor "A strong paragraph needs a clear and focused topic sentence. Use the traits you've identified earlier to create one. (Teddy’s uncle is both dismissive and condescending)"
         menu:
             "What was that again?":
                 jump level2_replay
@@ -149,7 +149,7 @@ label level2: # COMPLETE
 
     $ wrong = False
     label level2_task:
-        centered "[sentence]" (what_color="#FFFFFF")
+        centered "[sentence]" (what_color="#FFFFFF", what_size=44)
         $ rating = renpy.input("Rate from 1-5: ", length=1)
         if not (rating == "1" or rating == "2" or rating == "3" or rating == "4" or rating == "5"):
             "Invalid input."
@@ -196,21 +196,21 @@ label level3: # not complete, finish questions
 
     label level3_task:
         menu:
-            "One clear example of the uncle's dismissive nature occurs when he mocks Teddy’s imaginative play":
+            "Notably, the uncle's dismissive nature occurs when he mocks Teddy’s imaginative play.":
                 if attempts > 1:
                     "You barely made it out alive."
                 else:
                     $ score += 1
                 "Your statement weakens the minion, but it’s still standing."
-            "One clear example of the uncle's dismissive nature occurs when he talks about how all children should stop playing games and focus on schoolwork.":
+            "Notably, the uncle's dismissive nature occurs when he talks about how all children should stop playing games and focus on schoolwork.":
                 "Not quite, give it another go."
                 $ attempts += 1
                 jump level3_task
-            "One clear example of the uncle's dismissive nature occurs when he helps Teddy build a fort but criticizes its design.":
+            "Notably, the uncle's dismissive nature occurs when he helps Teddy build a fort but criticizes its design.":
                 "Not quite, give it another go."
                 $ attempts += 1
                 jump level3_task
-            "One clear example of the uncle's dismissive nature occurs when he tells Teddy, 'You should be playing outside like a real boy":
+            "Notably, the uncle's dismissive nature occurs when he tells Teddy, \"You should be playing outside like a real boy.\"":
                 "Not quite, give it another go."
                 $ attempts += 1
                 jump level3_task
@@ -241,6 +241,27 @@ label level4: # COMPLETE
                 pass
 
     "You instinctively take our the Magical Quill."
+
+#     $ wrong = False
+#     label level4_task:
+#         menu:
+#             "“Look what you’re doing, for heaven’s sake!”":
+#                 "Not quite, give it another go."
+#                 $ wrong = True
+#                 jump level4_task
+#             "“He’s got his head in the clouds again.”":
+#                 "Not quite, give it another go."
+#                 $ wrong = True
+#                 jump level4_task
+#             "“The next thing we know, you’ll be wanting us to put skirts on you!”":
+#                 "Guided by your hands, the quill moves swiftly across the air."
+#             "“They looked pretty much like paper dolls to me.”":
+#                 "Not quite, give it another go."
+#                 $ wrong = True
+#                 jump level4_task
+#         if not wrong:
+#             $ score += 1
+#     "It further weakens the minion."
 
     $ wrong = False
     label level4_task:
@@ -434,32 +455,32 @@ label level8: # COMPLETE
     $ wrong = False
     label level8_task:
         menu:
-            "To conclude, the uncle’s neutral stance neither discourages nor encourages Teddy’s creative endeavors, leaving him to develop independently.":
+            "Overall, the uncle’s neutral stance neither discourages nor encourages Teddy’s creative endeavors, leaving him to develop independently.":
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level8_task
-            "To conclude, the uncle’s playful and humorous attitude allows Teddy to explore his imagination freely without judgment.":
+            "Overall, the uncle’s playful and humorous attitude allows Teddy to explore his imagination freely without judgment.":
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level8_task
-            "To conclude, the uncle’s supportive and encouraging behaviors help nurture Teddy’s imaginative spirit and foster creativity.":
+            "Overall, the uncle’s supportive and encouraging behaviors help nurture Teddy’s imaginative spirit and foster creativity.":
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level8_task
-            "To conclude, the uncle’s dismissive and condescending behaviors work together to stifle Teddy’s imaginative spirit and reinforce rigid expectations of maturity and conformity.":
+            "Overall, the uncle’s dismissive and condescending behaviors work together to stifle Teddy’s imaginative spirit and reinforce rigid expectations of maturity and conformity.":
                 "Good job!"
 
         if not wrong:
             $ score += 1
 
-    mentor "Now that you have gotten a taste of what it was like to structure a simple paragraph essay, it is now your turn."
+    mentor "Now that you have gotten a taste of what it was like to structure a simple paragraph, it is now your turn."
     pov "But I am not ready yet."
     mentor "You won't know unless you actually try."
-    mentor "Using the following exemplar essay we came up with, write your own, this time, on Teddy from \"The Fall of a City.\""
-    pov "Here goes... (I should write my essay about Teddy in a Google docs...)"
+    mentor "Using the following exemplar paragraph we came up with, write your own, this time, on Teddy from \"The Fall of a City.\""
+    pov "Here goes... (I should write my paragraph about Teddy in a Google docs...)"
 
     label level8_exemplar:
-#         centered "Teddy’s uncle in The Fall of a City is portrayed as both dismissive and condescending, which ultimately diminishes Teddy’s sense of imagination and self-worth. One clear example of the uncle's dismissive nature occurs when he mocks Teddy’s imaginative play, stating, “Only fools and cowards build forts out of paper boxes” (Nowlan). By belittling Teddy’s creation, the uncle invalidates Teddy’s imaginative world, discouraging his creative expression. Moreover, the uncle's condescending attitude is evident when he says, “You're too old for such nonsense,” implying that Teddy should outgrow his creative pursuits. This remark not only undermines Teddy’s imagination but also implies that creativity is childish and unworthy of respect. In the end, the uncle’s dismissive and condescending behaviors work together to stifle Teddy’s imaginative spirit and reinforce rigid expectations of maturity and conformity." (what_color="#FFFFFF", what_size=40)
+#         centered "Teddy’s uncle in The Fall of a City is portrayed as both dismissive and condescending, which ultimately diminishes Teddy’s sense of imagination and self-worth. Notably, the uncle's dismissive nature occurs when he mocks Teddy’s imaginative play, stating, “Only fools and cowards build forts out of paper boxes” (Nowlan). By belittling Teddy’s creation, the uncle invalidates Teddy’s imaginative world, discouraging his creative expression. Moreover, the uncle's condescending attitude is evident when he says, “You're too old for such nonsense,” implying that Teddy should outgrow his creative pursuits. This remark not only undermines Teddy’s imagination but also implies that creativity is childish and unworthy of respect. In the end, the uncle’s dismissive and condescending behaviors work together to stifle Teddy’s imaginative spirit and reinforce rigid expectations of maturity and conformity." (what_color="#FFFFFF", what_size=40)
         show screen Exemplar
         ""
         hide screen Exemplar
@@ -479,108 +500,55 @@ label level9:
     mentor "I see you have finally finished, care to go through a checklist with me?"
     pov "Ok."
 
-    centered "Feel free to switch over to the doc if you need another look at your essay. Self checking does not count towards total score." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
-
-    # go through a list of checklist to see if user has everything, tell them ot go fix everything afterwards, tell user this part is weighted a certain %
-    centered "Have you identified at least two character traits of Teddy?" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
-    menu:
-        "Yes":
-            pass
-        "No":
-            pass
-
-    centered "Have you included a PEE for each of the character traits?" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
-    menu:
-        "Yes":
-            pass
-        "No":
-            pass
-    centered "I have structured the paragraph properly? (Topic sentence, PEE, PEE, concluding sentence)" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
-    menu:
-        "Yes":
-            pass
-        "No":
-            pass
-    centered "Not included any first person pronouns." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
-    menu:
-        "No, there are no first person pronouns in the paragraph.":
-            pass
-        "Yes, there are first person pronouns present.":
-            pass
-    centered "I properly cited quotes in MLA format." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
-    menu:
-        "Yes":
-            pass
-        "No":
-            pass
-    centered "I effectively used transition words throughout the paragraph." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
-    menu:
-        "Yes":
-            pass
-        "No":
-            pass
-    centered "Is your paragraph clear, organized, and easy to follow?" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
-    menu:
-        "Yes":
-            pass
-        "No":
-            pass
-    centered "Did you proofread for grammar, spelling, and punctuation?" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
-    menu:
-        "Yes":
-            pass
-        "No":
-            pass
-
-    centered "Now turn to a peer and have them check over your work, this part will count towards your total score the most, so make sure you corrected any errors." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
+    centered "Feel free to switch over to the doc if you need another look at your paragraph. This part will count towards your total score." (what_color="#000000", what_size=44, what_font="AndyBold.ttf")
 
     $ paragraph_points = 0
     $ paragraph_total_points = 8
 
-    centered "Identified at least two character traits of Teddy?" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
+    centered "Identified at least two character traits of Teddy?" (what_color="#000000", what_size=44, what_font="AndyBold.ttf")
     menu:
         "Yes":
             $ paragraph_points += 1
         "No":
             pass
 
-    centered "Included a PEE for each of the character traits?" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
+    centered "Included a PEE for each of the character traits?" (what_color="#000000", what_size=44, what_font="AndyBold.ttf")
     menu:
         "Yes":
             $ paragraph_points += 1
         "No":
             pass
-    centered "Structured the paragraph properly? (Topic sentence, PEE, PEE, concluding sentence)" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
+    centered "Structured the paragraph properly? (Topic sentence, PEE, PEE, concluding sentence)" (what_color="#000000", what_size=44, what_font="AndyBold.ttf")
     menu:
         "Yes":
             $ paragraph_points += 1
         "No":
             pass
-    centered "Not included any first person pronouns." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
+    centered "Not included any first person pronouns." (what_color="#000000", what_size=44, what_font="AndyBold.ttf")
     menu:
         "No, there are no first person pronouns in the paragraph.":
             $ paragraph_points += 1
         "Yes, there are first person pronouns present.":
             pass
-    centered "Properly cited quotes in MLA format." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
+    centered "Properly cited quotes in MLA format." (what_color="#000000", what_size=44, what_font="AndyBold.ttf")
     menu:
         "Yes":
             $ paragraph_points += 1
         "No":
             pass
-    centered "Effectively used transition words throughout the paragraph." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
+    centered "Effectively used transition words throughout the paragraph." (what_color="#000000", what_size=44, what_font="AndyBold.ttf")
     menu:
         "Yes":
             $ paragraph_points += 1
         "No":
             pass
-    centered "Paragraph is clear, organized, and easy to follow." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
+    centered "Paragraph is clear, organized, and easy to follow." (what_color="#000000", what_size=44, what_font="AndyBold.ttf")
     menu:
         "Yes":
             $ paragraph_points += 1
         "No":
             pass
-    centered "No grammar, spelling, and/or punctuation errors." (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
+    centered "No grammar, spelling, and/or punctuation errors." (what_color="#000000", what_size=44, what_font="AndyBold.ttf")
     menu:
         "No, the sentence is clear of any grammar, spelling, and punctuation errors.":
             $ paragraph_points += 1
@@ -641,7 +609,7 @@ label level10:
                     centered "ENDING 2/5" (what_color="#FFFFFF", what_size=40, what_font="AndyBold.ttf")
                     jump endscreen
 
-        "The world around you brightens. You stand atop a grand library tower, overlooking a land where words and essays flow like rivers of knowledge."
+        "The world around you brightens. You stand atop a grand library tower, overlooking a land where words and paragraphs flow like rivers of knowledge."
         mentor "You are now the Master of Composition. Remember, the power of structure and clarity is not just in writing but in all things. What you’ve learned here will guide you, both in Literaria and in the world beyond."
         pov "I didn’t just defeat chaos… I learned how to communicate with purpose."
         "As you gaze upon the restored Literaria, you feel the weight of your accomplishment. A message echoes in your mind: Structure and clarity are the keys to success, both in writing and in life."
@@ -665,7 +633,7 @@ label level10:
         with fade
         "Chaos & Confusion, now strengthened by the protagonist’s failure to grasp key writing principles, swirl in the air. The once vibrant world of Literaria is slowly consumed by darkness."
         pov "No… I can’t stop them."
-        "Fragments of sentences and broken essays rise up, engulfing the land. The Mentor watches, their expression somber."
+        "Fragments of sentences and broken paragraphs rise up, engulfing the land. The Mentor watches, their expression somber."
         mentor "This is what happens when the basics are ignored. Without evidence, explanation, or proper structure, even the strongest argument falls apart."
         pov "I… I wasn’t careful enough."
         "The world continues to unravel, spiraling into chaos."
