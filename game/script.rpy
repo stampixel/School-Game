@@ -233,7 +233,7 @@ label level4: # COMPLETE
             $ score += 1
 
     label level4_replay:
-        mentor "Now tell me, what is a quotation that best demonstrates the point you’ve identified previously? (mocking Teddy’s imaginative play)"
+        mentor "Now tell me, what is a quotation that best demonstrates the point you’ve identified previously? (dismissive nature when mocking Teddy’s imaginative play)"
         menu:
             "What was that again?":
                 jump level4_replay
@@ -266,17 +266,17 @@ label level4: # COMPLETE
     $ wrong = False
     label level4_task:
         menu:
-            "“Look what you’re doing, for heaven’s sake!”":
+            "The man resumed eating. ‘After supper, I’ll take a look and see just what you have been doing’ (Nolan 3)":
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level4_task
-            "“He’s got his head in the clouds again.”":
+            "‘He’s got his head in the clouds again.’ His uncle laughed. ‘Half the time, he doesn’t know whether he’s living on Earth or Mars’ (Nolan 2)":
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level4_task
-            "“The next thing we know, you’ll be wanting us to put skirts on you!”":
+            "‘You’d never guess what the kid has been doing up there!’ He shook his head in wonder and amusement. ‘You’d never believe it, but that great big lummox has been playing with paper dolls’":
                 "Guided by your hands, the quill moves swiftly across the air."
-            "“They looked pretty much like paper dolls to me.”":
+            "When Teddy went through the living room, his uncle did not speak, but he glances up from his newspaper and grinned slyly. (Nolan 5)":
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level4_task
