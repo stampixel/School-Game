@@ -15,7 +15,7 @@ init:
 label start: # COMPLETE
     python:
         score = 0
-        total_score = 9
+        total_score = 10
         sidequest = False
 
     scene bg forest
@@ -266,17 +266,17 @@ label level4: # COMPLETE
     $ wrong = False
     label level4_task:
         menu:
-            "The man resumed eating. ‘After supper, I’ll take a look and see just what you have been doing’ (Nolan 3)":
+            "“The man resumed eating. ‘After supper, I’ll take a look and see just what you have been doing’” (Nolan 3)":
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level4_task
-            "‘He’s got his head in the clouds again.’ His uncle laughed. ‘Half the time, he doesn’t know whether he’s living on Earth or Mars’ (Nolan 2)":
+            " “‘He’s got his head in the clouds again.’ His uncle laughed. ‘Half the time, he doesn’t know whether he’s living on Earth or Mars’” (Nolan 2)":
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level4_task
-            "‘You’d never guess what the kid has been doing up there!’ He shook his head in wonder and amusement. ‘You’d never believe it, but that great big lummox has been playing with paper dolls’":
+            "“‘You’d never guess what the kid has been doing up there!’ He shook his head in wonder and amusement. ‘You’d never believe it, but that great big lummox has been playing with paper dolls’” (Nolan 4)":
                 "Guided by your hands, the quill moves swiftly across the air."
-            "When Teddy went through the living room, his uncle did not speak, but he glances up from his newspaper and grinned slyly. (Nolan 5)":
+            "“When Teddy went through the living room, his uncle did not speak, but he glances up from his newspaper and grinned slyly” (Nolan 5)":
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level4_task
@@ -338,15 +338,15 @@ label level5: # COMPLETE
     $ wrong = False
     label level5_task:
         menu:
-            "Teddy's uncle supports and encourages Teddy's creative play, referring to him as a "bright young boy" who shows great imagination. He praises Teddy's efforts, seeing the paper figures as a testament to his intelligence and creativity (Nolan 4). The uncle's approval highlights his belief that Teddy's imagination is something to be nurtured.":
-                "Guided by your hands, the quill moves swiftly across the air."
-                $ wrong = True
-                jump level5_task
+#             "Teddy's uncle supports and encourages Teddy's creative play, referring to him as a \"bright young boy\" who shows great imagination. He praises Teddy's efforts, seeing the paper figures as a testament to his intelligence and creativity (Nolan 4). The uncle's approval highlights his belief that Teddy's imagination is something to be nurtured.":
+#                 "Guided by your hands, the quill moves swiftly across the air."
+#                 $ wrong = True
+#                 jump level5_task
             "Teddy’s uncle dismisses Teddy’s play with paper figures, but does so in a light-hearted manner, playfully teasing him about his imagination without intending to cause harm (Nolan 4). While he refers to Teddy as a “great big lummox,” the tone is more joking than cruel, indicating that the uncle doesn’t fully understand the significance of Teddy’s imaginative world, but isn’t being deliberately hurtful.":
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level5_task
-            "Teddy’s uncle ridicules Teddy, himself, and his creative play with paper figures, referring to him disparagingly as a “great big lummox” and mocking his interested as childish and insignificant (Nolan 4). The uncle’s laughter and disbelief further underscores his dismissive view of Teddy’s imagination and efforts as the great King Theodore has been reduced to simply being a paper doll.":
+            "Teddy’s uncle ridicules Teddy, himself, and his creative play with paper figures, referring to him disparagingly as a “great big lummox” and mocking his interest as childish and insignificant (Nolan 4). The uncle’s laughter and disbelief further underscores his dismissive view of Teddy’s imagination and efforts as the great King Theodore has been reduced to simply being a paper doll.":
                 "Well answered!"
 #             "By belittling Teddy’s artistic talents, the uncle invalidates his drawing skills, discouraging his pursuit of art.":
 #                 "Not quite, give it another go."
@@ -380,12 +380,13 @@ label level6: # COMPLETE
             "Got it!":
                 pass
 
+# NEED FIXING
     $ wrong = False
     label level6_task:
         menu:
-            "Moreover, the uncle's condescending attitude is evident when he says...":
+            "Moreover, the uncle's condescending attitude is evident...":
                 "Very well, amazing choice. You won't even need me at this point!"
-            "The uncle's condescending attitude is evident when he says...":
+            "The uncle's condescending attitude is evident...":
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level6_task
@@ -406,7 +407,7 @@ label level6: # COMPLETE
 
 label level7: # COMPLETE
     label level7_replay:
-        mentor "Which of the following is the best choice when transitioning from the previous phrase, remember to think back to PEE. (Moreover, the uncle's condescending attitude is evident when he says)"
+        mentor "Which of the following is the best choice in terms of evidence (when point is on uncle's condescending attitude)?"
         menu:
             "What was that again?":
                 jump level7_replay
@@ -416,27 +417,57 @@ label level7: # COMPLETE
     $ wrong = False
     label level7_task:
         menu:
-            "‘You’re wasting your time with those toys,’ implying that Teddy should outgrow his creative pursuits. This remark not only undermines Teddy’s imagination but also implies that creativity is childish and unworthy of respect."(what_size=22):
+            "“He shook his head in wonder and amusement” (Nolan 4)":
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level7_task
-            "\"You're too old for such nonsense,\" implying that Teddy should outgrow his creative pursuits. This remark not only undermines Teddy’s imagination but also implies that creativity is childish and unworthy of respect.":
+            "“His uncle pointing a warning finger. ‘Don’t get saucy now, mister. I know paper dolls when I see ‘em.’ Once again he burst into laughter. His cheeks were the colour of a tomato.” (Nolan 4)":
                 "Nicely done, good choice!"
-#             "‘Only babies build forts,’ implying that Teddy should outgrow his creative pursuits. This remark not only undermines Teddy’s imagination but also implies that creativity is childish and unworthy of respect.":
-#                 "Not quite, give it another go."
-#                 $ wrong = True
-#                 jump level7_task
-            "‘Why don’t you read a book instead?’ implying that Teddy should outgrow his creative pursuits. This remark not only undermines Teddy’s imagination but also implies that creativity is childish and unworthy of respect.":
+            "“Look at me when I speak to you. Have you been playing with matches up there” (Nolan 3)":
+                "Not quite, give it another go."
+                $ wrong = True
+                jump level7_task
+            "“Yes, I think it’s about time that one of us went up there and found out what he’s been doing” (Nolan 3)":
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level7_task
         if not score:
             $ score += 1
+    pov "Wow, this minion is even stronger. Let's push forward and launch another attack"
+    jump level7b
+
+label level7b: # COMPLETE
+    label level7b_replay:
+        mentor "Which of the following is the best choice in terms of explanation? (“His uncle pointing a warning finger. ‘Don’t get saucy now, mister. I know paper dolls when I see ‘em.’ Once again he burst into laughter. His cheeks were the colour of a tomato.”)"
+        menu:
+            "What was that again?":
+                jump level7b_replay
+            "Got it!":
+                pass
+
+    $ wrong = False
+    label level7b_task:
+        menu:
+            "Teddy’s uncle is condescending when he uses patronizing language like “mister” and “saucy”, dismissing Teddy’s interests with a belittling comment about “paper dolls,” and mocking Teddy’s creativity with laughter, thereby showing a lack of respect and understanding (Nolan 4). ":
+                "Nicely done, good choice!"
+#             "Teddy’s uncle uses terms like “mister” and “saucy” in a teasing, almost affectionate way, as if trying to engage in playful banter with Teddy (Nolan 4). While he does mention the “paper dolls,” his tone suggests mild amusement rather than outright dismissal, implying that he may not fully appreciate Teddy’s creativity but isn’t entirely disrespectful.":
+#                 $ wrong = True
+#                 jump level7b_task
+            "Teddy’s uncle refers to “paper dolls” and uses words like “mister” and “saucy” in a casual, offhand manner, as though he doesn’t take Teddy’s play too seriously but isn’t actively trying to hurt his feelings (Nolan 4). While the uncle may not fully understand Teddy’s imagination, his tone comes across more as indifferent than intentionally condescending.":
+                "Not quite, give it another go."
+                $ wrong = True
+                jump level7b_task
+#             "“Yes, I think it’s about time that one of us went up there and found out what he’s been doing” (Nolan 3)":
+#                 "Not quite, give it another go."
+#                 $ wrong = True
+#                 jump level7b_task
+        if not score:
+            $ score += 1
+
     hide skeleton
     with dissolve
-    "After selecting and explaining the quote, the protagonist defeats the second minion."
+    "After explaining the quote, the protagonist defeats the second minion."
     jump level8
-
 
 label level8: # COMPLETE
 
