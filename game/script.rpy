@@ -328,7 +328,7 @@ label level5: # COMPLETE
     "You face the now weakened minion, ready for the final blow."
 
     label level5_replay:
-        mentor "Now, explain how the quote you selected proves the character trait (“The next thing we know, you’ll be wanting us to put skirts on you!”). Choose the best answer."
+        mentor "Now, explain how the quote you selected proves the character trait (‘You’d never guess what the kid has been doing up there!’ He shook his head in wonder and amusement. ‘You’d never believe it, but that great big lummox has been playing with paper dolls’). Choose the best answer."
         menu:
             "What was that again?":
                 jump level5_replay
@@ -338,20 +338,20 @@ label level5: # COMPLETE
     $ wrong = False
     label level5_task:
         menu:
-            "By praising Teddy’s creation, the uncle encourages his imaginative world, boosting his creative expression.":
+            "Teddy's uncle supports and encourages Teddy's creative play, referring to him as a "bright young boy" who shows great imagination. He praises Teddy's efforts, seeing the paper figures as a testament to his intelligence and creativity (Nolan 4). The uncle's approval highlights his belief that Teddy's imagination is something to be nurtured.":
                 "Guided by your hands, the quill moves swiftly across the air."
                 $ wrong = True
                 jump level5_task
-            "By ignoring Teddy’s creation, the uncle passively supports his imaginative world, allowing it to flourish.":
+            "Teddy’s uncle dismisses Teddy’s play with paper figures, but does so in a light-hearted manner, playfully teasing him about his imagination without intending to cause harm (Nolan 4). While he refers to Teddy as a “great big lummox,” the tone is more joking than cruel, indicating that the uncle doesn’t fully understand the significance of Teddy’s imaginative world, but isn’t being deliberately hurtful.":
                 "Not quite, give it another go."
                 $ wrong = True
                 jump level5_task
-            "By belittling Teddy’s creation, the uncle invalidates Teddy’s imaginative world, discouraging his creative expression.":
+            "Teddy’s uncle ridicules Teddy, himself, and his creative play with paper figures, referring to him disparagingly as a “great big lummox” and mocking his interested as childish and insignificant (Nolan 4). The uncle’s laughter and disbelief further underscores his dismissive view of Teddy’s imagination and efforts as the great King Theodore has been reduced to simply being a paper doll.":
                 "Well answered!"
-            "By belittling Teddy’s artistic talents, the uncle invalidates his drawing skills, discouraging his pursuit of art.":
-                "Not quite, give it another go."
-                $ wrong = True
-                jump level5_task
+#             "By belittling Teddy’s artistic talents, the uncle invalidates his drawing skills, discouraging his pursuit of art.":
+#                 "Not quite, give it another go."
+#                 $ wrong = True
+#                 jump level5_task
         if not wrong:
             $ score += 1
     hide minion
