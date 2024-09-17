@@ -49,7 +49,7 @@ label start: # COMPLETE
 
 
         "Wait":
-            "You sit quietly, trying to gather their thoughts."
+            "You sit quietly, trying to gather your thoughts."
             pause(2.0)
             show rogue at left
             with move
@@ -60,13 +60,13 @@ label start: # COMPLETE
     mystery "Ah, I see you've awakened at last. Welcome to Literaria, young one."
     "The figure steps fully into view, revealing themselves, a wise and kindly face etched with years of knowledge."
     pov "Who... who are you??? Where am I??? What is going on???"
-    mentor "I am known as the Mentor, a guide for those chosen by the ancient Order of Composition. And you, my dear student, are one such chosen. The fate of Literaria rests upon your ability to master the art of Script Weaving."
-    mentor "Come, there is much to learn, and time is of the essence. The forces of Chaos & Confusion grow stronger by the day, and only through the power of words can we hope to restore balance to our land."
-    "The Mentor gestures to a nearby path, winding deeper into the heart of the forest, where the journey will begin."
+    mentor "I am known as the Mentor, a guide for those chosen by the ancient Order of Composition, and you, my dear student, are one such chosen.  The fate of Literaria rests upon your ability to master the art of Script Weaving."
+    mentor "Come. There is much to learn, and time is of the essence.  The forces of Chaos & Confusion grow stronger by the day and only through the power of words can we hope to restore balance to our land."
+    "The Mentor gestures to a nearby path, winding deeper into the heart of the forest where the journey will begin."
     pov "Why me? I don't even know who I am..."
     mentor "That is something you will discover on this journey. But know this, the power within you is immense, waiting to be unlocked. You are the one destined to wield the Magical Quill, to bring order where there is none."
-    "With a nod, the Mentor begins to lead the way, and you, though uncertain, feels a growing determination within."
-    mentor "Follow me, and I will teach you the ways of composition. Together, we will restore harmony to Literaria. Once and for all!"
+    "With a nod, the mentor beings to lead the way, and you, though uncertain, feel a growing determination within."
+    mentor "Follow me and I will teach you the ways of composition.  Together  we will restore harmony to Literaria - once and for all."
 
     label choice_intro:
         mentor "Are you ready [povname]?"
@@ -128,7 +128,7 @@ label level2: # COMPLETE
     with fade
 
     "The portal closes behind you, disappearing altogether, without leaving a single trace behind." with hpunch
-    "You look around, gray brick walls, ceiling tens of meters high, you appear to be in some sort of castle."
+    "You look around, gray brick wall, and the ceiling tens of meter high - you appear to be in some sort of castle."
     pause(3.0)
     "A magical Aura leads you to a large, ancient writing desk with a blank parchment lying on it."
     show mentor at right
@@ -166,7 +166,7 @@ label level2: # COMPLETE
     mentor "Yes, thank you. Much time has been put into this..."
     pov "..."
     mentor "You'll understand."
-    "You proceed followed by your mentor."
+    "You proceed, followed by your mentor."
 
     jump level3
 
@@ -217,7 +217,7 @@ label level3: # not complete, finish questions
     jump level4
 
 label level4: # COMPLETE
-    mentor "Don't worry kid, I have another trick up my sleeves."
+    mentor "Don't worry kid, I have another trick up my sleeve."
     mentor "Riddle me this: Dawn comes after night like ________ comes after Point."
 
     $ wrong = False
@@ -293,9 +293,9 @@ label sidequest: # COMPLETE
     "All of a sudden, everything around you freezes."
     show bg bw
     with dissolve
-    "The vibrant colors of Literaria dimmed, and the swirling winds came to a halt. The world, once alive with energy, now stood eerily still. "
+    "The vibrant colours of Literaria dim and the swirling winds come to a halt. The world, once alive with energy, now stand eerily still."
     pov "What’s happening? Why is everything stopped?" with hpunch
-    mentor "The Mentor's eyes, usually so full of wisdom and warmth, now held a deep, almost somber intensity. They took a step closer to you, the silence between you growing heavier with each passing moment."
+    mentor "The Mentor's eyes, usually so full of wisdom and warmth, now held a deep, almost somber intensity. They took a step closer to you; the silence between you goring heavier with each passing moment."
     "There is something you need to know, something I have kept hidden until now."
     pov "What do you mean? What’s going on?"
     mentor "I am not just a guide in this world, not just a teacher showing you the ways of Literaria. I am its creator."
@@ -303,14 +303,14 @@ label sidequest: # COMPLETE
     pov "You… created this world? But why? Why reveal this to me now?"
     mentor "Literaria is more than just a land of stories; it is a delicate balance of knowledge, creativity, and truth. I brought it into existence to help others learn, to give life to the lessons within stories."
     "The Mentor pauses, looking into your eyes with a seriousness that makes your heart race."
-    mentor "I will give you two options. Either forget the ugly truth or keep fighting knowing everything around you is planned and fictional."
+    mentor "I will give you two options:  either forget the ugly truth or keep fighting knowing everything around you is planned and fictional."
     "The Mentor steps back slightly, raising their hand as two glowing orbs appear between you. Each orb pulses with a different energy, radiating a sense of immense power and responsibility."
 
     "(Pick wisely as this is a determining factor of the outcome of your journey)"
     menu:
         "Keep fighting knowing everything around you is preplanned and has a predetermined outcome.":
             mentor "It might be hard at first, but I thank you for understanding."
-            "The world reverts back to normal. You can feel the cool breeze of the wind, it flows around and you feel comfort."
+            "The world reverts back to normal. You can feel the cool breeze of the wind; it flows around and you feel comfort."
             mentor "Now, where were we?"
             mentor "To truly defeat the minion, you must explain how this evidence supports your point."
             $ sidequest = True
@@ -325,7 +325,7 @@ label sidequest: # COMPLETE
 
 label level5: # COMPLETE
     pov "Understood."
-    "You face the now weakened minion, ready for the final blow."
+    "You face the now-weakened minion, ready for the final blow."
 
     label level5_replay:
         mentor "Now, explain how the quote you selected proves the character trait (‘You’d never guess what the kid has been doing up there!’ He shook his head in wonder and amusement. ‘You’d never believe it, but that great big lummox has been playing with paper dolls’). Choose the best answer."
@@ -679,7 +679,7 @@ label endscreen:
     show bg end
     show screen StatsUI
     with fade
-    "You've completed the game, if you would like to save your results, please take a screenshot!"
+    "You've completed the game.  If you would like to save your results, please take a screenshot right now!"
     "Press \"esc\" and save your game into a slot so you can show off your results!"
 
     menu:
